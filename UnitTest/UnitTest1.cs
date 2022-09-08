@@ -25,10 +25,17 @@ namespace UnitTestPayRollTest
             employeeDetails.Add(new EmployeeDetails(ID: 27, Name: "Pablo", StartDate: Convert.ToDateTime("2024-01-08"), Gender: "M", PhoneNumber: 8563269874, Address: "Miami", Department: "Claims", BasicPay: 62000, Deduction: 300, TaxablePay: 200, IncomeTax: 100, NetPay: 61400));
             employeeDetails.Add(new EmployeeDetails(ID: 27, Name: "Rita", StartDate: Convert.ToDateTime("2024-03-02"), Gender: "F", PhoneNumber: 745124639, Address: "Miami", Department: "Claims", BasicPay: 62000, Deduction: 300, TaxablePay: 200, IncomeTax: 100, NetPay: 61400));
 
-            System.DateTime StartDateTime = DateTime.Now;
+            // Without Threading
+            DateTime StartDateTime = DateTime.Now;
             emppayroll.AddEmployee(employeeDetails);
             DateTime StopDateTimes = DateTime.Now;
             Console.WriteLine("Duration without threads: " + (StopDateTimes - StartDateTime));
+
+            // With Threading
+            DateTime startDateTimeThread = DateTime.Now;
+            emppayroll.AddEmployeeToPayrollWithThread(employeeDetails);
+            DateTime endDateTimeThread = DateTime.Now;
+            Console.WriteLine("Duration with thread:" + (startDateTimeThread - endDateTimeThread));
         }
     }
 }
